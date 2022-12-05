@@ -1,6 +1,6 @@
-import { useState } from "react";
 import List from "./list/List";
 import { useSelector, useDispatch } from "react-redux"; // import 해주세요.
+import { addTodo, deleteTodo } from "./redux/modules/todoSet";
 
 const App = () => {
   const addTodoStore = useSelector((state) => state);
@@ -31,7 +31,7 @@ const App = () => {
           </div> */}
       <button
         onClick={() => {
-          dispatch({ type: "ADD_TODO" });
+          dispatch(addTodo);
         }}
       >
         추가하기
