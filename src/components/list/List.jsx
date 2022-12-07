@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTodo, toggleStatusTodo } from "../../../redux/modules/todos.js";
+import { deleteTodo, toggleStatusTodo } from "../../redux/modules/todos.js";
 import { Link } from "react-router-dom";
 
 const List = () => {
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos.todos);
+  const todos = useSelector((state) => state.todos);
 
   const onDeleteTodo = (id) => {
     dispatch(deleteTodo(id));
@@ -23,13 +23,13 @@ const List = () => {
         {todos.map((todo) => {
           if (!todo.isDone) {
             return (
-              <StTodoContainer key={todo.id}>
+              <StTodoContainer key={todos.id}>
                 <StLink to={`/${todo.id}`} key={todo.id}>
                   <div>상세보기</div>
                 </StLink>
                 <div>
                   <h2 className="todo-title">{todo.title}</h2>
-                  <div>{todo.body}</div>
+                  <div>{todo.content}</div>
                 </div>
                 <StDialogFooter>
                   <StButton
@@ -63,7 +63,7 @@ const List = () => {
                 </StLink>
                 <div>
                   <h2 className="todo-title">{todo.title}</h2>
-                  <div>{todo.body}</div>
+                  <div>{todo.content}</div>
                 </div>
                 <StDialogFooter>
                   <StButton

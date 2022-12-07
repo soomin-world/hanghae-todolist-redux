@@ -1,24 +1,14 @@
+import React from "react";
 import styled from "styled-components";
-import Form from "../form/Form";
-import Header from "../header/Header";
-import List from "../list/List";
 
-function Layout() {
-  return (
-    <div className="layout">
-      <STLayout className="container">
-        <Header />
-        <Form />
-        <List />
-      </STLayout>
-    </div>
-  );
-}
-
-const STLayout = styled.div`
-  max-width: 1200px;
-  min-width: 800px;
-  margin: 0px auto;
-`;
+const Layout = ({ children }) => {
+  return <StLayout>{children}</StLayout>;
+};
 
 export default Layout;
+
+const StLayout = styled.div`
+  max-width: 1200px;
+  min-width: 800px;
+  margin: 0 auto;
+`;

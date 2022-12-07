@@ -1,23 +1,22 @@
+import React from "react";
 import styled from "styled-components";
 
-function Header() {
+const Header = () => {
   return (
-    <STHeader className="header">
+    <StContainer>
       <div>My Todo List</div>
       <div>React</div>
-    </STHeader>
+    </StContainer>
   );
-}
-const STHeader = styled.div`
-  border: 1px solid rgb(221, 221, 221);
+};
+export default Header;
+
+const StContainer = styled.div`
+  border: 1px solid #ddd;
   height: 60px;
   display: flex;
-  -webkit-box-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
   align-items: center;
-  padding: 0px 20px;
+  padding: 0 20px;
   margin-bottom: 24px;
 `;
-
-export default Header;
