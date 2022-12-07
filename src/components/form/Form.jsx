@@ -5,94 +5,86 @@ import { addTodo } from "../../redux/modules/todos";
 
 function Form() {
   const dispatch = useDispatch();
-  const [todo, setTodo] = useState({
-    id: 0,
-    title: "",
-    content: "",
-    isDone: false,
-  });
-
+  const [id, setId] = useState(4);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [id, setId] = useState(0);
-
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    if (title.trim() === "" || content.trim() === "") return;
     setId(id + 1);
-    dispatch(addTodo({ ...todo, id }));
-    setTodo({
-      id: id,
-      title: title,
-      body: content,
-      isDone: false,
-    });
+    dispatch(
+      addTodo({
+        id: id,
+        title: title,
+        content: content,
+        isDone: false,
+      }),
+      setContent(""),
+      setTitle("")
+    );
   };
 
   return (
-    <STForm className="input-container" onSubmit={onSubmitHandler}>
-      <STInputBox className="input-box">
-        <STLabel className="input-title">제목</STLabel>
-        <STInput
+    <StAddForm onSubmit={onSubmitHandler}>
+      <StInputGroup>
+        <StFormLabel>제목</StFormLabel>
+        <StAddInput
           type="text"
           name="title"
-          className="title-box"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(event) => setTitle(event.target.value)}
         />
-        <STLabel className="input-content">내용</STLabel>
-        <STInput
+        <StFormLabel>내용</StFormLabel>
+        <StAddInput
           type="text"
           name="content"
-          className="content-box"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(event) => setContent(event.target.value)}
         />
-      </STInputBox>
-      <STAddBtn className="submit-btn">추가하기</STAddBtn>
-    </STForm>
+      </StInputGroup>
+      <StAddButton>추가하기</StAddButton>
+    </StAddForm>
   );
 }
 
-const STForm = styled.form`
-  background-color: rgb(238, 238, 238);
-  border-radius: 12px;
-  margin: 0px auto;
+const StInputGroup = styled.div`
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
+  gap: 20px;
+`;
+
+const StFormLabel = styled.label`
+  font-size: 16px;
+  font-weight: 700;
+`;
+
+const StAddForm = styled.form`
+  background-color: #eee;
+  border-radius: 12px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 30px;
   gap: 20px;
 `;
 
-const STInputBox = styled.div`
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  gap: 20px;
-`;
-
-const STLabel = styled.label`
-  font-size: 16px;
-  font-weight: 700;
-`;
-
-const STInput = styled.input`
+const StAddInput = styled.input`
   height: 40px;
   width: 240px;
   border: none;
   border-radius: 12px;
-  padding: 0px 12px;
+  padding: 0 12px;
 `;
 
-const STAddBtn = styled.button`
+const StAddButton = styled.button`
   border: none;
   height: 40px;
   cursor: pointer;
   border-radius: 10px;
   background-color: teal;
   width: 140px;
-  color: rgb(255, 255, 255);
+  color: #fff;
   font-weight: 700;
 `;
 
